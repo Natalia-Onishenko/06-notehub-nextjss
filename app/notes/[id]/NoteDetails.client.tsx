@@ -15,11 +15,11 @@ export default function NoteDetailsClient() {
   } = useQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
+    refetchOnMount: false,
   });
 
   if (isLoading) return <p>Loading, please wait...</p>;
-  if (error) return <p>Something went wrong.</p>;
-  if (!note) return <p>Something went wrong.</p>;
+  if (error || !note) return <p>Something went wrong.</p>;
 
   return (
     <div className={css.container}>
